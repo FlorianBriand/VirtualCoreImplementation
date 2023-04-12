@@ -1,3 +1,5 @@
+OPCODE_MOV = "1000"
+
 
 def gestionOpcodeInstruction(opcode):
     # on vérifie que l'opcode est valide
@@ -29,6 +31,7 @@ def gestionOpcodeInstruction(opcode):
     elif opcode == "RSH":
         opcode = "1010"
     return opcode
+
 
 def gestionDestionation(destination):
     # on vérifie que le destination est valide
@@ -129,35 +132,31 @@ def gestionSecondOperand(secondOperand):
     return secondOperand, immediateValueFlag, immediateValue
 
 
-
-
 def convertiDataProcessingInstructionEnBinaire(ligne):
-    # OPCODE DESTINATION FIRST_OPERAND SECOND_OPERAND
+    bcc = "0000"
     opcode = ligne[0]
-    destination = ligne[1].replace(",", "")
-    firstOperand = ligne[2].replace(",", "")
-    secondOperand = ligne[3].replace(",", "")
-
     opcode = gestionOpcodeInstruction(opcode)
 
-    if (opcode != "0101"):
-        destionation = gestionDestionation(destination)
+    destination = ligne[1].replace(",", "")
+    firstOperand = ligne[2].replace(",", "")
+
+    destination = gestionDestionation(destination)
+
+    if opcode != OPCODE_MOV:
+        secondOperand = ligne[3].replace(",", "")
+
+        # on vérifie que le firstOperand est valide: soit un registre, soit un nombre
+        firstOperand = gestionFirstOperand(firstOperand)
+        # on vérifie que le secondOperand est valide: soit un registre, soit un nombre
+        secondOperand, immediateValueFlag, immediateValue = gestionSecondOperand(
+            secondOperand)
     else:
-        destionation = "0000"
-
-    # on vérifie que le firstOperand est valide: soit un registre, soit un nombre
-    firstOperand = gestionFirstOperand(firstOperand)
-
-    # on vérifie que le secondOperand est valide: soit un registre, soit un nombre
-    secondOperand, immediateValueFlag, immediateValue = gestionSecondOperand(
-        secondOperand)
-
-
-    # TODO Gérer le branch condition code
-    bcc = "0000"
+        secondOperand, immediateValueFlag, immediateValue = gestionSecondOperand(
+            firstOperand)
+        firstOperand = "0000"
 
     ligne_en_binaire = bcc + "000" + immediateValueFlag + opcode + firstOperand + \
-                       secondOperand + destionation + immediateValue
+                       secondOperand + destination + immediateValue
     # vérifier que binaires est de 32 bits
     if len(ligne_en_binaire) != 32:
         print("Erreur: binaire invalide | taille: " +

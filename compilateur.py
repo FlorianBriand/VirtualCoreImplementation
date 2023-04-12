@@ -26,8 +26,8 @@ def convert_ligne_to_string_of_0_and_1(ligne):
     if len(ligne) > 4:
         print("Erreur: trop de mots dans la ligne")
         exit(0)
-    # si la ligne a 2 mots, c'est une instruction de branchement
-    if len(ligne) == 2:
+
+    if ligne[0].upper() == "B":
         # BRANCH_OPCODE OFFSET
         resultat = convertiBranchementEnBinaire(ligne)
     else:
