@@ -2,27 +2,12 @@
 def gestionOpcodeBranchement(opcode):
 
     # on vérifie que l'opcode est valide
-    if opcode != "B" and opcode != "BEQ" and opcode != "BNE" and opcode != "BLE" and opcode != "BGE" and opcode != "BL" and opcode != "BG":
+    if opcode != "B":
         print("Erreur: opcode invalide")
         exit(0)
 
-    # on ajoute les bits de l'opcode
-    if opcode == "B":
-        opcode = "1000"
-    elif opcode == "BEQ":
-        opcode = "1001"
-    elif opcode == "BNE":
-        opcode = "1010"
-    elif opcode == "BLE":
-        opcode = "1011"
-    elif opcode == "BGE":
-        opcode = "1100"
-    elif opcode == "BL":
-        opcode = "1101"
-    elif opcode == "BG":
-        opcode = "1110"
+    return "1000"
 
-    return opcode
 
 
 def gestionOffsetBranchement(offset):
@@ -68,6 +53,11 @@ def gestionOffsetBranchement(offset):
 
 
 def convertiBranchementEnBinaire(ligne):
+
+    if len(ligne) != 2:
+        print("Erreur: une instruction branchement doit avoir 2 arguments")
+        exit(0)
+
     # BRANCH_OPCODE OFFSET
     opcode = ligne[0]
     offset = ligne[1]
@@ -78,9 +68,6 @@ def convertiBranchementEnBinaire(ligne):
 
     binaire = opcode + offset
 
-    # print("Taille de l'offset: " + str(len(offset)))
-    # print("Taille de l'opcode: " + str(len(opcode)))
-    # print("Taille du binaire: " + str(len(binaire)))
 
     # vérifier que binaires est de 32 bits
     if len(binaire) != 32:
@@ -88,6 +75,4 @@ def convertiBranchementEnBinaire(ligne):
               str(len(binaire)) + " | binaire: " + binaire)
         exit(0)
 
-    # on ajoute les bits de l'opcode
-    # print(binaire)
     return binaire
