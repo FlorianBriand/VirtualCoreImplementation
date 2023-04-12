@@ -517,6 +517,66 @@ class Test(unittest.TestCase):
         imm = resultat[24:32]
         self.assertEqual('00001010', imm, 'imm n\'est pas correct')
 
+    def test_MOV_R5_R6(self):
+        resultat = convert_ligne_to_string_of_0_and_1('MOV R4, R5')
+
+        # On vérifie que la longueur est correcte
+        self.assertEqual(32, len(resultat), 'La longueur du résultat n\'est pas correcte')
+
+        bcc = resultat[0:4]
+        self.assertEqual('0000', bcc, 'Le bcc n\'est pas correct')
+
+        alwaysSetToZero = resultat[4:7]
+        self.assertEqual('000', alwaysSetToZero, 'alwaysSetToZero n\'est pas correct')
+
+        flag = resultat[7]
+        self.assertEqual('0', flag, 'flag n\'est pas correct')
+
+        opcode = resultat[8:12]
+        self.assertEqual(OPCODE_MOV, opcode, 'opcode n\'est pas correct')
+
+        reg1 = resultat[12:16]
+        self.assertEqual('0000', reg1, 'reg1 n\'est pas correct')
+
+        reg2 = resultat[16:20]
+        self.assertEqual(R5, reg2, 'reg2 n\'est pas correct')
+
+        dest = resultat[20:24]
+        self.assertEqual(R4, dest, 'dest n\'est pas correct')
+
+        imm = resultat[24:32]
+        self.assertEqual('00000000', imm, 'imm n\'est pas correct')
+
+    def test_MOV_R5_10(self):
+        resultat = convert_ligne_to_string_of_0_and_1('MOV R4, 10')
+
+        # On vérifie que la longueur est correcte
+        self.assertEqual(32, len(resultat), 'La longueur du résultat n\'est pas correcte')
+
+        bcc = resultat[0:4]
+        self.assertEqual('0000', bcc, 'Le bcc n\'est pas correct')
+
+        alwaysSetToZero = resultat[4:7]
+        self.assertEqual('000', alwaysSetToZero, 'alwaysSetToZero n\'est pas correct')
+
+        flag = resultat[7]
+        self.assertEqual('1', flag, 'flag n\'est pas correct')
+
+        opcode = resultat[8:12]
+        self.assertEqual(OPCODE_MOV, opcode, 'opcode n\'est pas correct')
+
+        reg1 = resultat[12:16]
+        self.assertEqual('0000', reg1, 'reg1 n\'est pas correct')
+
+        reg2 = resultat[16:20]
+        self.assertEqual('0000', reg2, 'reg2 n\'est pas correct')
+
+        dest = resultat[20:24]
+        self.assertEqual(R4, dest, 'dest n\'est pas correct')
+
+        imm = resultat[24:32]
+        self.assertEqual('00001010', imm, 'imm n\'est pas correct')
+
 
 if __name__ == '__main__':
     unittest.main()
