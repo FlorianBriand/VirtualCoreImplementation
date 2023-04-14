@@ -8,6 +8,7 @@
 #define FILENAME_REGISTERS "core/registers.txt"
 #define FILENAME_REGISTERS_FINAL "core/final.txt"
 
+int R[16];// 16 registres
 
 int main() {
     //intialisation des variables globales

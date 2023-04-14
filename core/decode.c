@@ -4,7 +4,7 @@
 
 #include "decode.h"
 
-
+extern int R[16];
 
 void lire_fichier_registres(char *nom_fichier) {
     FILE *fichier = fopen(nom_fichier, "r");
