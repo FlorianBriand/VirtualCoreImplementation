@@ -27,9 +27,10 @@ def convert_ligne_to_string_of_0_and_1(ligne):
         print("Erreur: trop de mots dans la ligne")
         exit(0)
 
-    if ligne[0].upper() == "B":
+    if ligne[0][0].upper() == "B":
         # BRANCH_OPCODE OFFSET
         resultat = convertiBranchementEnBinaire(ligne)
+
     else:
         # OPCODE DESTINATION FIRST_OPERAND SECOND_OPERAND
         resultat = convertiDataProcessingInstructionEnBinaire(ligne)
