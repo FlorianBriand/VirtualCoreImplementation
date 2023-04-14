@@ -2,11 +2,28 @@
 def gestionOpcodeBranchement(opcode):
 
     # on vérifie que l'opcode est valide
-    if opcode != "B":
+    if opcode == "B":
+        opcode = "1000"
+    elif opcode == "BEQ":
+        opcode = "1001"
+    elif opcode == "BNE":
+        opcode = "1010"
+    elif opcode == "BLE":
+        opcode = "1011"
+    elif opcode == "BGE":
+        opcode = "1100"
+    elif opcode == "BL":
+        opcode = "1101"
+    elif opcode == "BG":
+        opcode = "1110"
+    else:
         print("Erreur: opcode invalide")
         exit(0)
 
-    return "1000"
+    return opcode
+
+
+
 
 
 
