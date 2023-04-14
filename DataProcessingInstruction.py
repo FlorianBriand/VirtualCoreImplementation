@@ -1,4 +1,5 @@
 OPCODE_MOV = "1000"
+OPCODE_CMP = "0101"
 
 
 def gestionOpcodeInstruction(opcode):
@@ -140,9 +141,10 @@ def convertiDataProcessingInstructionEnBinaire(ligne):
     destination = ligne[1].replace(",", "")
     firstOperand = ligne[2].replace(",", "")
 
-    destination = gestionDestionation(destination)
 
-    if opcode != OPCODE_MOV:
+
+    if opcode != OPCODE_MOV and opcode != OPCODE_CMP:
+        destination = gestionDestionation(destination)
         secondOperand = ligne[3].replace(",", "")
 
         # on vérifie que le firstOperand est valide: soit un registre, soit un nombre
@@ -150,10 +152,16 @@ def convertiDataProcessingInstructionEnBinaire(ligne):
         # on vérifie que le secondOperand est valide: soit un registre, soit un nombre
         secondOperand, immediateValueFlag, immediateValue = gestionSecondOperand(
             secondOperand)
-    else:
+    elif opcode == OPCODE_MOV:
+        destination = gestionDestionation(destination)
         secondOperand, immediateValueFlag, immediateValue = gestionSecondOperand(
             firstOperand)
         firstOperand = "0000"
+    elif opcode == OPCODE_CMP:
+        secondOperand, immediateValueFlag, immediateValue = gestionSecondOperand(
+            firstOperand)
+        firstOperand = gestionDestionation(destination)
+        destination = "0000"
 
     ligne_en_binaire = bcc + "000" + immediateValueFlag + opcode + firstOperand + \
                        secondOperand + destination + immediateValue
