@@ -7,7 +7,7 @@
 
 #include "main.h"
 
-int decode(int instruction);
+int decode(long instruction);
 void lire_fichier_registres(char *nom_fichier);
 void sauvegarder_registres(char *nom_fichier);
 

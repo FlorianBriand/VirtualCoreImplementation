@@ -11,12 +11,17 @@
 int R[16];// 16 registres
 
 int main() {
-    //intialisation des variables globales
+    //Fetch
+    //récupération des instructions
+    unsigned long instruction1 = fetch("out/bin.out", 0);
+
+    //Decode
+    //Initialisation des variables globales
     lire_fichier_registres(FILENAME_REGISTERS);
     int result;
     printf("R3=%x\n", R[3]);
     printf("Debut !\n");
-    int instruction = 0x031231a;
+    unsigned long instruction=0x31231a;
     result = decode(instruction);
     printf("Resultat = %x\n", result);
     printf("R3=%x\n", R[3]);

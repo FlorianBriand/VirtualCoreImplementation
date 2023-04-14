@@ -109,7 +109,7 @@ int res_ope2(int ope2) {
     return var2;
 }
 
-int decode(int instruction) {
+int decode(long instruction) {
 
 
     //Recuperer le opcode
@@ -131,7 +131,7 @@ int decode(int instruction) {
     int IVflag = (instruction & 0x00800000) >> 23;
 
     //int res
-    int res, var1, var2;
+    unsigned long res, var1, var2;
 
     printf("instruction = %x\n", instruction);
     printf("opcode = %x\n", opcode);
