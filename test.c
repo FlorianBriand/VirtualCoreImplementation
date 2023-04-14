@@ -188,7 +188,7 @@ int decode() {
             res=movedata(IV);
         }
         else {
-            res=movedata(ope2);
+            res=movedata(var2);
         }
         break;
     case 0x9:
