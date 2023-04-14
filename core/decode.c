@@ -173,13 +173,8 @@ int decode() {
 
     stocker_resultat(dest, res);
     return res;
-}
-
-stocker_resultat(dest, res
-);
-return
-res;     //return statement added for clarity and to adhere to best practices of always having a return statement in a function.
-}               //braces added for clarity and to adhere to best practices of always using braces with functions. 
+}     //return statement added for clarity and to adhere to best practices of always having a return statement in a function.
+//braces added for clarity and to adhere to best practices of always using braces with functions.
 
 int main() {
     //intialisation des variables globales
