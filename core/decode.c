@@ -2,13 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "decode.h"
 
-static int R[16];
+
 
 void lire_fichier_registres(char *nom_fichier) {
     FILE *fichier = fopen(nom_fichier, "r");
     if (fichier == NULL) {
         printf("Erreur: Impossible d'ouvrir le fichier\n");
+        // execute ls command
+        system("dir");
         return;
     }
     char buffer[256];
@@ -106,8 +109,8 @@ int res_ope2(int ope2) {
     return var2;
 }
 
-int decode() {
-    int instruction = 0x031231a;
+int decode(int instruction) {
+
 
     //Recuperer le opcode
     int opcode = (instruction & 0x00f00000) >> 20;
