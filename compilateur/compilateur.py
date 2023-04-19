@@ -46,14 +46,9 @@ def convert_file_of_0_and_1_to_binary_file():
     # Creation of list of 0 and 1
     binaire = []
 
-
-
     for i in range(0, len(contenu), 8):
-        bit = int(contenu[i:i+8],2)
-
-        #bit = bit.to_bytes(4, byteorder='big')
+        bit = int(contenu[i:i + 8], 2)
         binaire.append(bit)
-
 
     print(binaire)
     arrayBin = bytes(binaire)

@@ -141,8 +141,6 @@ def convertiDataProcessingInstructionEnBinaire(ligne):
     destination = ligne[1].replace(",", "")
     firstOperand = ligne[2].replace(",", "")
 
-
-
     if opcode != OPCODE_MOV and opcode != OPCODE_CMP:
         destination = gestionDestionation(destination)
         secondOperand = ligne[3].replace(",", "")

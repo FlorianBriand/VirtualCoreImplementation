@@ -1,6 +1,4 @@
-
 def gestionOpcodeBranchement(opcode):
-
     # on vérifie que l'opcode est valide
     if opcode == "B":
         opcode = "1000"
@@ -21,10 +19,6 @@ def gestionOpcodeBranchement(opcode):
         exit(0)
 
     return opcode
-
-
-
-
 
 
 def gestionOffsetBranchement(offset):
@@ -67,10 +61,7 @@ def gestionOffsetBranchement(offset):
     return offsetBinaire
 
 
-
-
 def convertiBranchementEnBinaire(ligne):
-
     if len(ligne) != 2:
         print("Erreur: une instruction branchement doit avoir 2 arguments")
         exit(0)
@@ -84,7 +75,6 @@ def convertiBranchementEnBinaire(ligne):
     offset = gestionOffsetBranchement(offset)
 
     binaire = opcode + offset
-
 
     # vérifier que binaires est de 32 bits
     if len(binaire) != 32:
