@@ -1,9 +1,9 @@
 from Branchement import convertiBranchementEnBinaire
 from DataProcessingInstruction import convertiDataProcessingInstructionEnBinaire
 
-TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "out/tmp_file_assembly_to_string_of_0_and_1.txt"
+TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "../out/tmp_file_assembly_to_string_of_0_and_1.txt"
 
-FILE_BINARY = "out/bin.out"
+FILE_BINARY = "../out/bin.out"
 
 
 def read_line_by_line(lignes):
