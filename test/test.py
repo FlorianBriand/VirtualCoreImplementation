@@ -1,6 +1,6 @@
 import unittest
 
-from compilateur import convert_ligne_to_string_of_0_and_1
+from compilateur.compilateur import convert_ligne_to_string_of_0_and_1
 
 OPCODE_AND = "0000"
 OPCODE_OR = "0001"
