@@ -112,18 +112,19 @@ def gestionSecondOperand(secondOperand):
 
     else:
         immediateValueFlag = "1"
-        secondOperand = int(secondOperand)
 
-        # on vérifie que le secondOperand est dans la plage [0, 255]
-        if secondOperand < 0 or secondOperand > 255:
-            print(
-                "Erreur: secondOperand invalide, doit être dans la plage [0, 255]")
-            exit(0)
+        if len(secondOperand) > 1 and secondOperand[0] == "0" and secondOperand[1] == "x":
+            secondOperand = secondOperand[2:]
+            # on converti de hexadécimale à binaire
+            immediateValue = bin(int(secondOperand, 16))[2:]
+            print("Voici la valeur en binaire par partir de la valeur hexadécimale: ", secondOperand)
+        else:
+            secondOperand = int(secondOperand)
 
-        # on convertit le secondOperand en binaire
-        immediateValue = bin(secondOperand)[2:]
+            # on convertit le secondOperand en binaire
+            immediateValue = bin(secondOperand)[2:]
 
-        # on ajoute des 0 au début du secondOperand pour que le secondOperand soit de 8 bits
+            # on ajoute des 0 au début du secondOperand pour que le secondOperand soit de 8 bits
         while len(immediateValue) < 8:
             immediateValue = "0" + immediateValue
 

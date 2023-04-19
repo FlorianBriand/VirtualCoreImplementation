@@ -1,5 +1,5 @@
-from Branchement import convertiBranchementEnBinaire
-from DataProcessingInstruction import convertiDataProcessingInstructionEnBinaire
+from compilateur.Branchement import convertiBranchementEnBinaire
+from compilateur.DataProcessingInstruction import convertiDataProcessingInstructionEnBinaire
 
 TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "../out/tmp_file_assembly_to_string_of_0_and_1.txt"
 
