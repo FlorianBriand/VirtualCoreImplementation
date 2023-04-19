@@ -1,11 +1,13 @@
+import os
+
 from compilateur.Branchement import convertiBranchementEnBinaire
 from compilateur.DataProcessingInstruction import convertiDataProcessingInstructionEnBinaire
 
-TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "../out/tmp_file_assembly_to_string_of_0_and_1.txt"
+TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "out/tmp_file_assembly_to_string_of_0_and_1.txt"
 
-FILE_BINARY = "../out/bin.out"
+FILE_BINARY = "out/bin.out"
 
-FILE_ASSEMBLEUR_S = "assembleur.s"
+FILE_ASSEMBLEUR_S = "compilateur/assembleur.s"
 
 
 def read_line_by_line(lignes):
@@ -95,6 +97,3 @@ def lireFichier(nomFichier):
     fichier.close()
     return lignes
 
-
-if __name__ == "__main__":
-    main()
