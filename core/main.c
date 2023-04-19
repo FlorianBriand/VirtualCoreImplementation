@@ -7,24 +7,28 @@
 // define location of the file registers.txt
 #define FILENAME_REGISTERS "core/registers.txt"
 #define FILENAME_REGISTERS_FINAL "core/final.txt"
+#define FILENAME_INSTRUCTIONS "out/bin.out"
 
 int R[16];// 16 registres
 
 int main() {
     //Fetch
     //récupération des instructions
-    unsigned long instruction1 = fetch("out/bin.out", 0);
+    int pc=0;
+    unsigned long instruction = fetch(FILENAME_INSTRUCTIONS, pc);
+    for (int i = 0; i < 3; i++) {
+        int newpc = calcul_pc(pc, instruction);
+        pc = newpc;
+        instruction = fetch(FILENAME_INSTRUCTIONS, pc);
+    }
 
     //Decode
     //Initialisation des variables globales
     lire_fichier_registres(FILENAME_REGISTERS);
     int result;
-    printf("R3=%x\n", R[3]);
     printf("Debut !\n");
-    unsigned long instruction=0x31231a;
     result = decode(instruction);
     printf("Resultat = %x\n", result);
-    printf("R3=%x\n", R[3]);
     sauvegarder_registres(FILENAME_REGISTERS_FINAL);
     return 0;
 }
