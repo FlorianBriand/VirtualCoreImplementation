@@ -4,7 +4,7 @@
 
 #ifndef VIRTUALCOREIMPLEMENTATION_DECODE_H
 #define VIRTUALCOREIMPLEMENTATION_DECODE_H
-
+#include "execute.h"
 
 int decode(long instruction);
 void lire_fichier_registres(char *nom_fichier);
