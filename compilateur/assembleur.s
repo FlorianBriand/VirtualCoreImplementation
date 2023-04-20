@@ -1,5 +1,4 @@
-B 0
-B 0
-B 2
-B 1
-B -1
+CMP r1, r2
+BEQ 2
+ADD r1, r2, r3
+SUB r1, r2, r3
