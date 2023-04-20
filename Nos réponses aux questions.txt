@@ -1,0 +1,5 @@
+1. registres
+2. le résultat est supérieur à 2^64
+3.
+4. vérifier qu'on ne sort pas du programme
+5. non, il faudrait plusieurs cores
