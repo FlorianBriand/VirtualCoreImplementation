@@ -9,6 +9,8 @@
 #define FILENAME_REGISTERS_FINAL "core/final.txt"
 #define FILENAME_INSTRUCTIONS "out/bin.out"
 
+
+// TODO : Change int to long long (64 bits)
 int R[16];// 16 registres
 
 int main() {
