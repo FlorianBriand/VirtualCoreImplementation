@@ -65,6 +65,15 @@ int getIVflag(long instruction) {
     return (instruction & 0x00800000) >> 23;
 }
 
+int getSigne(long instruction) {
+    return (instruction & 0x00000010) >> 4;
+}
+
+int getOffset(long instruction) {
+    return (instruction & 0x03ffffff);
+}
+
+
 int decode(long instruction) {
 
     int res, opcode, ope1, ope2, dest, IV, IVflag;

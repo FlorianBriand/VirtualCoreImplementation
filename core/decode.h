@@ -17,6 +17,8 @@ int getOpe2(long instruction);
 int getDest(long instruction);
 int getIV(long instruction);
 int getIVflag(long instruction);
+int getSigne(long instruction);
+int getOffset(long instruction);
 
 
 
