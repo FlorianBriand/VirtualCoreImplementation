@@ -7,26 +7,25 @@
 
 
 
-
-// TODO : Change int to long long (64 bits)
-int R[16];// 16 registres
+unsigned long long R[16];// 16 registres
 
 int get_nb_instructions(const char *string);
 
 int main() {
     //Fetch
     //récupération des instructions
-    int pc=0, result, newpc, nbinstructions;
-    unsigned long instruction;
+    unsigned long long result;
+    int pc = 0, newpc, nbinstructions;
+    unsigned int instruction;
     lire_fichier_registres(FILENAME_REGISTERS);
-    nbinstructions= get_nb_instructions(FILENAME_INSTRUCTIONS);
+    nbinstructions = get_nb_instructions(FILENAME_INSTRUCTIONS);
     printf("nb instructions : %d\n", nbinstructions);
     while (pc < nbinstructions && pc >= 0) {
         instruction = fetch(FILENAME_INSTRUCTIONS, pc);
         int BBC = getBCC(instruction), opcode = getOpcode(instruction);
-        if(opcode != 0x5 && BBC != 0x8){
+        if (opcode != 0x5 && BBC != 0x8) {
             result = decode(instruction);
-            printf("result : %x\n", result);
+            printf("result : %llx\n", result);
         }
 
         newpc = calcul_pc(pc, instruction);
@@ -34,10 +33,9 @@ int main() {
         pc = newpc;
     }
 
-    if (pc == nbinstructions){
+    if (pc == nbinstructions) {
         printf("Programme terminé\n");
-    }
-    else{
+    } else {
         printf("Erreur de segmentation\n");
     }
 
@@ -66,6 +64,7 @@ int get_nb_instructions(const char *string) {
 
     return i / 4;
 }
+
 /* Explanation: The code has been refactored to make it more readable, efficient, and adhere to best coding practices. The masks have been moved outside of the print statements, the return statement has been added, and the braces have been added around the function for clarity. */
 
 
@@ -93,7 +92,7 @@ void sauvegarder_registres(char *nom_fichier) {
         return;
     }
     for (int i = 0; i < 16; i++) {
-        fprintf(fichier, "R%X=0x%X\n", i, R[i]);
+        fprintf(fichier, "R%X=0x%llx\n", i, R[i]);
     }
     fclose(fichier);
 }

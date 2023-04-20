@@ -4,9 +4,9 @@
 
 #include "fetch.h"
 
-extern int R[16];// 16 registres
+extern unsigned long long R[16];// 16 registres
 
-int getPCcomparaison(unsigned long instruction, int pc);
+int getPCcomparaison(unsigned int instruction, int pc);
 
 int comparaison(bool resultat_comparaison, int pc, long instruction_suivante);
 
@@ -38,8 +38,8 @@ int calcul_pc(int pc, long instruction) {
     }
 }
 
-int getPCcomparaison(unsigned long instruction, int pc) {
-    unsigned long instruction_suivante = fetch(FILENAME_INSTRUCTIONS, pc + 1);
+int getPCcomparaison(unsigned int instruction, int pc) {
+    unsigned int instruction_suivante = fetch(FILENAME_INSTRUCTIONS, pc + 1);
     int BCC = getBCC(instruction_suivante), ope1 = getOpe1(instruction), ope2 = getOpe2(instruction);
 
 
@@ -74,13 +74,13 @@ int comparaison(bool resultat_comparaison, int pc, long instruction_suivante) {
     }
 }
 
-unsigned long fetch(char *instruction_file, int pc) {
+unsigned int fetch(char *instruction_file, int pc) {
     FILE *file = NULL;
     int c, i;
 
     unsigned char *instruction;
     instruction = malloc(4);
-    unsigned long hex_instruction = 0;
+    unsigned int hex_instruction = 0;
 
     file = fopen(instruction_file, "rb");
 

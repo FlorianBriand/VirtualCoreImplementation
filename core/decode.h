@@ -6,7 +6,7 @@
 #define VIRTUALCOREIMPLEMENTATION_DECODE_H
 #include "execute.h"
 
-int decode(long instruction);
+unsigned long long decode(long instruction);
 
 int getBCC(long instruction);
 int getOpcode(long instruction);

@@ -4,7 +4,7 @@
 #include "execute.h"
 
 
-extern int R[16];
+extern unsigned long long R[16];
 
 
 int getBCC(long instruction) {
@@ -44,9 +44,9 @@ int getOffset(long instruction) {
 }
 
 
-int decode(long instruction) {
-
-    int res, opcode, ope1, ope2, dest, IV, IVflag;
+unsigned long long decode(long instruction) {
+    unsigned long long res;
+    int opcode, ope1, ope2, dest, IV, IVflag;
 
     //Recuperer le opcode
     opcode = getOpcode(instruction);

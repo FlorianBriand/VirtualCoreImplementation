@@ -15,7 +15,9 @@
 #include "decode.h"
 #include "main.h"
 
-unsigned long fetch(char* instruction_file, int pc);
+unsigned int fetch(char* instruction_file, int pc);
 int calcul_pc(int pc, long instruction);
+
+int logical_left_shift(int value, int shift);
 
 #endif //UNTITLED1_FETCH_H
