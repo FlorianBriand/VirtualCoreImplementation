@@ -8,7 +8,7 @@ extern int R[16];
 
 
 int getBCC(long instruction) {
-    return (instruction & 0xf0000000) >> 24;
+    return (instruction & 0xf0000000) >> 28;
 }
 
 int getOpcode(long instruction) {
@@ -60,15 +60,6 @@ int decode(long instruction) {
     IV = getIV(instruction);
     //Recuperer le IVflag
     IVflag = getIVflag(instruction);
-
-
-    printf("instruction = %x\n", instruction);
-    printf("opcode = %x\n", opcode);
-    printf("ope1 = %x\n", ope1);
-    printf("ope2 = %x\n", ope2);
-    printf("dest = %x\n", dest);
-    printf("IV = %x\n", IV);
-    printf("IVflag = %x\n", IVflag);
 
     res = execute(opcode, ope1, ope2, dest, IV, IVflag);
 

@@ -2,67 +2,103 @@
 // Created by raphi on 14/04/2023.
 //
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <malloc.h>
 #include "fetch.h"
-#include "decode.h"
+
+extern int R[16];// 16 registres
+
+int getPCcomparaison(unsigned long instruction, int pc);
+
+int comparaison(bool resultat_comparaison, int pc, long instruction_suivante);
 
 int calcul_pc_branchement(int pc, long instruction) {
     int signe, offset, newpc;
 
     signe = getSigne(instruction);
-    printf("signe : %x\n", signe);
 
     offset = getOffset(instruction);
-    printf("offset : %x\n", offset);
 
     newpc = pc + (pow(-1, signe) * offset);
-    printf("new pc : %d\n", newpc);
+
     return newpc;
 }
 
-int calcul_pc(int pc, long instruction){
-    int BCC;
+int calcul_pc(int pc, long instruction) {
+    int BCC, opcode;
     BCC = getBCC(instruction);
-    if (BCC == 0x8){
-        printf("branchement\n");
+    opcode = getOpcode(instruction);
+    if (BCC == 0x8) {
         return calcul_pc_branchement(pc, instruction);
     }
-    //TODO: Si on a une comparaison
+    if (opcode == 0x5) {
+        int newpc = getPCcomparaison(instruction, pc);
+        return newpc;
+    } else {
+        return pc + 1;
 
-
+    }
 }
 
-unsigned long fetch(char* instruction_file, int pc){
+int getPCcomparaison(unsigned long instruction, int pc) {
+    unsigned long instruction_suivante = fetch(FILENAME_INSTRUCTIONS, pc + 1);
+    int BCC = getBCC(instruction_suivante), ope1 = getOpe1(instruction), ope2 = getOpe2(instruction);
+
+
+    switch (BCC) {
+        case 0x9:
+            return comparaison(R[ope1] == R[ope2], pc, instruction_suivante);
+        case 0xA:
+            return comparaison(R[ope1] != R[ope2], pc, instruction_suivante);
+        case 0xB:
+            return comparaison(R[ope1] <= R[ope2], pc, instruction_suivante);
+        case 0xC:
+            return comparaison(R[ope1] >= R[ope2], pc, instruction_suivante);
+        case 0xD:
+            return comparaison(R[ope1] < R[ope2], pc, instruction_suivante);
+        case 0xE:
+            return comparaison(R[ope1] > R[ope2], pc, instruction_suivante);
+        default:
+            printf("Erreur dans le BCC\n");
+            exit(1);
+
+    }
+
+
+    return 0;
+}
+
+int comparaison(bool resultat_comparaison, int pc, long instruction_suivante) {
+    if (resultat_comparaison) {
+        return calcul_pc_branchement(pc + 1, instruction_suivante);;
+    } else {
+        return pc + 2;
+    }
+}
+
+unsigned long fetch(char *instruction_file, int pc) {
     FILE *file = NULL;
     int c, i;
 
-    unsigned char* instruction;
+    unsigned char *instruction;
     instruction = malloc(4);
     unsigned long hex_instruction = 0;
 
     file = fopen(instruction_file, "rb");
 
-    if(file==NULL){
+    if (file == NULL) {
         printf("Erreur dans l'ouverture du fichier instructions\n");
         exit(1);
     }
 
-    fseek(file, 4*pc, SEEK_SET);
+    fseek(file, 4 * pc, SEEK_SET);
     fread(instruction, 4, 1, file);
 
     printf("fetched instruction : ");
-    for(i=0;i<4;i++){
+    for (i = 0; i < 4; i++) {
         printf("%02x ", instruction[i]);
     }
     printf("\n");
 
-    hex_instruction = (instruction[0]<<24) | (instruction[1]<<16) | (instruction[2]<<8) | instruction[3];
-
-    printf("hex instruction : %lx\n", hex_instruction);
+    hex_instruction = (instruction[0] << 24) | (instruction[1] << 16) | (instruction[2] << 8) | instruction[3];
 
     fclose(file);
 
