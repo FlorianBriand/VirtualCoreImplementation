@@ -35,3 +35,33 @@ int main() {
     return 0;
 }
 /* Explanation: The code has been refactored to make it more readable, efficient, and adhere to best coding practices. The masks have been moved outside of the print statements, the return statement has been added, and the braces have been added around the function for clarity. */
+
+
+void lire_fichier_registres(char *nom_fichier) {
+    FILE *fichier = fopen(nom_fichier, "r");
+    if (fichier == NULL) {
+        printf("Erreur: Impossible d'ouvrir le fichier\n");
+        return;
+    }
+    char buffer[256];
+    int i = 0;
+    while (fgets(buffer, 256, fichier) && i < 16) {
+        unsigned int val;
+        if (sscanf(buffer, "R%X=0x%x", &i, &val) == 2) {
+            R[i] = val;
+        }
+    }
+    fclose(fichier);
+}
+
+void sauvegarder_registres(char *nom_fichier) {
+    FILE *fichier = fopen(nom_fichier, "w");
+    if (fichier == NULL) {
+        printf("Erreur: Impossible d'ouvrir le fichier\n");
+        return;
+    }
+    for (int i = 0; i < 16; i++) {
+        fprintf(fichier, "R%X=0x%X\n", i, R[i]);
+    }
+    fclose(fichier);
+}

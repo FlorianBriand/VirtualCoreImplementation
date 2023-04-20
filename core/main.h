@@ -9,6 +9,7 @@
 #include "decode.h"
 #include "fetch.h"
 
-
+void lire_fichier_registres(char *nom_fichier);
+void sauvegarder_registres(char *nom_fichier);
 
 #endif //VIRTUALCOREIMPLEMENTATION_MAIN_H

@@ -7,8 +7,6 @@
 #include "execute.h"
 
 int decode(long instruction);
-void lire_fichier_registres(char *nom_fichier);
-void sauvegarder_registres(char *nom_fichier);
 
 int getBCC(long instruction);
 int getOpcode(long instruction);

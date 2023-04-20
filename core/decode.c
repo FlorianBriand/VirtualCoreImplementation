@@ -6,36 +6,6 @@
 
 extern int R[16];
 
-void lire_fichier_registres(char *nom_fichier) {
-    FILE *fichier = fopen(nom_fichier, "r");
-    if (fichier == NULL) {
-        printf("Erreur: Impossible d'ouvrir le fichier\n");
-        // execute ls command
-        system("dir");
-        return;
-    }
-    char buffer[256];
-    int i = 0;
-    while (fgets(buffer, 256, fichier) && i < 16) {
-        unsigned int val;
-        if (sscanf(buffer, "R%X=0x%x", &i, &val) == 2) {
-            R[i] = val;
-        }
-    }
-    fclose(fichier);
-}
-
-void sauvegarder_registres(char *nom_fichier) {
-    FILE *fichier = fopen(nom_fichier, "w");
-    if (fichier == NULL) {
-        printf("Erreur: Impossible d'ouvrir le fichier\n");
-        return;
-    }
-    for (int i = 0; i < 16; i++) {
-        fprintf(fichier, "R%X=0x%X\n", i, R[i]);
-    }
-    fclose(fichier);
-}
 
 int getBCC(long instruction) {
     return (instruction & 0xf0000000) >> 24;
