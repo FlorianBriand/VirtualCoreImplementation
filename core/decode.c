@@ -67,25 +67,20 @@ int getIVflag(long instruction) {
 
 int decode(long instruction) {
 
-    int res;
+    int res, opcode, ope1, ope2, dest, IV, IVflag;
 
     //Recuperer le opcode
-    int opcode = getOpcode(instruction);
-
+    opcode = getOpcode(instruction);
     //Recuperer le ope1
-    int ope1 = getOpe1(instruction);
-
+    ope1 = getOpe1(instruction);
     //Recuperer le ope2
-    int ope2 = getOpe2(instruction);
-
+    ope2 = getOpe2(instruction);
     //Recuperer le destanation
-    int dest = getDest(instruction);
-
+    dest = getDest(instruction);
     //Recuperer le IV
-    int IV = getIV(instruction);
-
+    IV = getIV(instruction);
     //Recuperer le IVflag
-    int IVflag = getIVflag(instruction);
+    IVflag = getIVflag(instruction);
 
 
     printf("instruction = %x\n", instruction);
