@@ -68,7 +68,12 @@ def main():
     nomFichier = FILE_ASSEMBLEUR_S
     if verifiSiFichierExiste(nomFichier):
         lignes = lireFichier(nomFichier)
+
+    # remove all ligne with # in it
+    lignes = [ligne for ligne in lignes if ligne[0] != "#"]
+
     print(lignes)
+
 
     read_line_by_line(lignes)
 
