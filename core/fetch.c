@@ -63,8 +63,4 @@ unsigned long fetch(char* instruction_file, int pc){
     fclose(file);
 
     return hex_instruction;
-
-    //TODO: read instruction 32*pc in file
-    //TODO: if last 4bit != 0000 -> decode this specific structure of operation
-    //TODO: compute the new value of the pc (+1 or specific number)
 }
