@@ -32,7 +32,7 @@ int getIV(long instruction) {
 }
 
 int getIVflag(long instruction) {
-    return (instruction & 0x00800000) >> 23;
+    return (instruction & 0x01000000) >> 24;
 }
 
 int getSigne(long instruction) {
