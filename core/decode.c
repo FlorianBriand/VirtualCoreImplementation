@@ -36,7 +36,7 @@ int getIVflag(long instruction) {
 }
 
 int getSigne(long instruction) {
-    return (instruction & 0x00000010) >> 4;
+    return (instruction & 0x08000000) >> 27;
 }
 
 int getOffset(long instruction) {
