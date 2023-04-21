@@ -1,0 +1,79 @@
+# Initial state : r0 : 0x0000000000000000
+# Final state : r0 : 0x0123456789abcdef
+MOV r0, 0x01
+# r0 = 0x0000000000000001
+LSH r0, r0, 56
+# r0 = 0x0100000000000000
+MOV r1, 0x23
+# r1 = 0x0000000000000023
+LSH r1, r1, 48
+# r1 = 0x0023000000000000
+ADD r0, r0, r1
+# r0 = 0x0123000000000000
+MOV r1, 0x45
+# r1 = 0x0000000000000045
+LSH r1, r1, 40
+# r1 = 0x0000450000000000
+ADD r0, r0, r1
+# r0 = 0x0123450000000000
+MOV r1, 0x67
+# r1 = 0x0000000000000067
+LSH r1, r1, 32
+# r1 = 0x0000006700000000
+ADD r0, r0, r1
+# r0 = 0x0123456700000000
+MOV r1, 0x89
+# r1 = 0x0000000000000089
+LSH r1, r1, 24
+# r1 = 0x0000000089000000
+ADD r0, r0, r1
+# r0 = 0x0123456789000000
+MOV r1, 0xab
+# r1 = 0x00000000000000ab
+LSH r1, r1, 16
+# r1 = 0x0000000000ab0000
+ADD r0, r0, r1
+# r0 = 0x0123456789ab0000
+MOV r1, 0xcd
+# r1 = 0x00000000000000cd
+LSH r1, r1, 8
+# r1 = 0x000000000000cd00
+ADD r0, r0, r1
+# r0 = 0x0123456789abcd00
+MOV r1, 0xef
+# r1 = 0x00000000000000ef
+ADD r0, r0, r1
+# r0 = 0x0123456789abcdef
+# Initial state : r1 : 0x0000000000000000
+# Final state :   r1 : 0xa5a5a5a5a5a5a5a5
+MOV r4, 0xa5
+MOV r2, 64
+SUB r2, r2, 8
+LSH r3, r4, r2
+ADD r1, r1, r3
+CMP r2, 0
+BNE -4
+# Initial state : r2 : 0x0000000000000000
+# Final state :   r2 : 0xaef45d745aff584f
+MOV r2, 0xae
+LSH r2, r2, 56
+MOV r3, 0xf4
+LSH r3, r3, 48
+ADD r2, r2, r3
+MOV r3, 0x5d
+LSH r3, r3, 40
+ADD r2, r2, r3
+MOV r3, 0x74
+LSH r3, r3, 32
+ADD r2, r2, r3
+MOV r3, 0x5a
+LSH r3, r3, 24
+ADD r2, r2, r3
+MOV r3, 0xff
+LSH r3, r3, 16
+ADD r2, r2, r3
+MOV r3, 0x58
+LSH r3, r3, 8
+ADD r2, r2, r3
+MOV r3, 0x4f
+ADD r2, r2, r3
