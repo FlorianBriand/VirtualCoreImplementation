@@ -43,23 +43,23 @@ int calcul_pc(int pc, long instruction) {
 int getPCcomparaison(unsigned int instruction, int pc) {
     unsigned int instruction_suivante = fetch(FILENAME_INSTRUCTIONS, pc + 1);
     int BCC = getBCC(instruction_suivante), ope1 = getOpe1(instruction), ope2 = getOpe2(instruction);
-    int IVflag = getIVflag(instruction_suivante), IV = getIV(instruction_suivante);
+    int IVflag = getIVflag(instruction), IV = getIV(instruction);
 
+    int var1 = R[ope1];
     int var2 = recup_var2(IVflag, IV, ope2);
-
     switch (BCC) {
         case 0x9:
-            return comparaison(R[ope1] == var2, pc, instruction_suivante);
+            return comparaison(var1 == var2, pc, instruction_suivante);
         case 0xA:
-            return comparaison(R[ope1] != var2, pc, instruction_suivante);
+            return comparaison(var1 != var2, pc, instruction_suivante);
         case 0xB:
-            return comparaison(R[ope1] <= var2, pc, instruction_suivante);
+            return comparaison(var1 <= var2, pc, instruction_suivante);
         case 0xC:
-            return comparaison(R[ope1] >= var2, pc, instruction_suivante);
+            return comparaison(var1 >= var2, pc, instruction_suivante);
         case 0xD:
-            return comparaison(R[ope1] < var2, pc, instruction_suivante);
+            return comparaison(var1 < var2, pc, instruction_suivante);
         case 0xE:
-            return comparaison(R[ope1] > var2, pc, instruction_suivante);
+            return comparaison(var1 > var2, pc, instruction_suivante);
         default:
             printf("Erreur dans le BCC\n");
             exit(1);
