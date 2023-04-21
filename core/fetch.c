@@ -10,6 +10,8 @@ int getPCcomparaison(unsigned int instruction, int pc);
 
 int comparaison(bool resultat_comparaison, int pc, long instruction_suivante);
 
+int recup_var2(int vflag, int iv, int ope2);
+
 int calcul_pc_branchement(int pc, long instruction) {
     int signe, offset, newpc;
 
@@ -41,21 +43,23 @@ int calcul_pc(int pc, long instruction) {
 int getPCcomparaison(unsigned int instruction, int pc) {
     unsigned int instruction_suivante = fetch(FILENAME_INSTRUCTIONS, pc + 1);
     int BCC = getBCC(instruction_suivante), ope1 = getOpe1(instruction), ope2 = getOpe2(instruction);
+    int IVflag = getIVflag(instruction_suivante), IV = getIV(instruction_suivante);
 
+    int var2 = recup_var2(IVflag, IV, ope2);
 
     switch (BCC) {
         case 0x9:
-            return comparaison(R[ope1] == R[ope2], pc, instruction_suivante);
+            return comparaison(R[ope1] == var2, pc, instruction_suivante);
         case 0xA:
-            return comparaison(R[ope1] != R[ope2], pc, instruction_suivante);
+            return comparaison(R[ope1] != var2, pc, instruction_suivante);
         case 0xB:
-            return comparaison(R[ope1] <= R[ope2], pc, instruction_suivante);
+            return comparaison(R[ope1] <= var2, pc, instruction_suivante);
         case 0xC:
-            return comparaison(R[ope1] >= R[ope2], pc, instruction_suivante);
+            return comparaison(R[ope1] >= var2, pc, instruction_suivante);
         case 0xD:
-            return comparaison(R[ope1] < R[ope2], pc, instruction_suivante);
+            return comparaison(R[ope1] < var2, pc, instruction_suivante);
         case 0xE:
-            return comparaison(R[ope1] > R[ope2], pc, instruction_suivante);
+            return comparaison(R[ope1] > var2, pc, instruction_suivante);
         default:
             printf("Erreur dans le BCC\n");
             exit(1);
@@ -64,6 +68,14 @@ int getPCcomparaison(unsigned int instruction, int pc) {
 
 
     return 0;
+}
+
+int recup_var2(int vflag, int iv, int ope2) {
+    if (vflag == 0) {
+        return R[ope2];
+    } else {
+        return iv;
+    }
 }
 
 int comparaison(bool resultat_comparaison, int pc, long instruction_suivante) {
