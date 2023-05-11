@@ -8,7 +8,8 @@ TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "out/tmp_file_assembly_to_string_of_0_a
 FILE_BINARY = "out/bin.out"
 
 FILE_ASSEMBLEUR_S = "compilateur/assembleur.s"
-
+#FILE_ASSEMBLEUR_S = "compilateur/first_program.s"
+#FILE_ASSEMBLEUR_S = "compilateur/third_program.s"
 
 def read_line_by_line(lignes):
     conversion = ""
