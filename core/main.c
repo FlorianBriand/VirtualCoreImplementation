@@ -77,8 +77,8 @@ void lire_fichier_registres(char *nom_fichier) {
     char buffer[256];
     int i = 0;
     while (fgets(buffer, 256, fichier) && i < 16) {
-        unsigned int val;
-        if (sscanf(buffer, "R%X=0x%x", &i, &val) == 2) {
+        unsigned long long val;
+        if (sscanf(buffer, "R%X=0x%llx", &i, &val) == 2) {
             R[i] = val;
         }
     }
