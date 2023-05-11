@@ -1,13 +1,8 @@
-# Initial state : 0x0000000000000000
-# Final state : 0x0123456789abcdef
-MOV r0, 0x01
-# r0 = 0x0000000000000001
-LSH r0, r0, 56
-# r0 = 0x0100000000000000
-MOV r1, 0x23
-LSH r1, r1, 48
-# r1 = 0x0000000000000023
-#LSH r1, r1, 12
-# r1 = 0x0023000000000000
-ADD r0, r0, r1
-# r0 = 0x0123000000000000
+# Initial state : R1 : 0x5
+#                 R2 : 0x3
+#                 R3 : 0x0
+# Final state : R4 : 0xf
+CMP R2,R3
+BEQ 3
+ADD R4,R1,R1
+B -3
