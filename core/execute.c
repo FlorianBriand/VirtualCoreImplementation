@@ -4,6 +4,8 @@
 
 #include "execute.h"
 
+char carry = 0;
+
 extern unsigned long long R[16];
 
 /*Toute les opérations*/
@@ -31,9 +33,33 @@ unsigned long long addition(unsigned long long a, unsigned long long b) {
     return resultat;
 }
 
+//add with carry
+unsigned long long addition_with_carry(unsigned long long a, unsigned long long b) {
+    unsigned long long resultat = a + b + carry;
+    if(resultat<a || resultat<b){
+        carry = 1;
+    }
+    else{
+        carry = 0;
+    }
+    return resultat;
+}
+
 //sous
 unsigned long long soustraction(unsigned long long a, unsigned long long b) {
     unsigned long long resultat = a - b;
+    return resultat;
+}
+
+//sous with carry
+unsigned long long soustraction_with_carry(unsigned long long a, unsigned long long b) {
+    unsigned long long resultat = a - b - carry;
+    if(resultat>a || resultat>b){
+        carry = 1;
+    }
+    else{
+        carry = 0;
+    }
     return resultat;
 }
 
@@ -48,7 +74,6 @@ unsigned long long logical_left_shift(unsigned long long a, unsigned long long b
     unsigned long long resultat = a << b;
     return resultat;
 }
-
 
 //lrs
 unsigned long long logical_right_shift(unsigned long long a, unsigned long long b) {
@@ -98,8 +123,14 @@ unsigned long long execute(int opcode,int ope1,int ope2,int dest,int IV,int IVfl
         case 0x3:
             res = IVflag == 0x01 ? addition(var1, IV) : addition(var1, var2);
             break;
+        case 0x4:
+            res = IVflag == 0x01 ? addition_with_carry(var1, IV) : addition_with_carry(var1, var2);
+            break;
         case 0x6:
             res = IVflag == 0x01 ? soustraction(var1, IV) : soustraction(var1, var2);
+            break;
+        case 0x7:
+            res = IVflag == 0x01 ? soustraction_with_carry(var1, IV) : soustraction_with_carry(var1, var2);
             break;
         case 0x8:
             res = IVflag == 0x01 ? movedata(IV) : movedata(ope2);
