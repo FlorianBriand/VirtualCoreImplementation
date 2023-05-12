@@ -107,11 +107,11 @@ unsigned int fetch(char *instruction_file, int pc) {
     fseek(file, 4 * pc, SEEK_SET);
     fread(instruction, 4, 1, file);
 
-    printf("fetched instruction : ");
+    //printf("fetched instruction : ");
     for (i = 0; i < 4; i++) {
-        printf("%02x ", instruction[i]);
+        //printf("%02x ", instruction[i]);
     }
-    printf("\n");
+    //printf("\n");
 
     hex_instruction = (instruction[0] << 24) | (instruction[1] << 16) | (instruction[2] << 8) | instruction[3];
 
