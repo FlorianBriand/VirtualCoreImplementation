@@ -38,17 +38,17 @@ int main(int argc, char *argv[]) {
     unsigned int instruction;
     lire_fichier_registres(filename_registers);
     nbinstructions = get_nb_instructions(filename_instructions);
-    printf("nb instructions : %d\n", nbinstructions);
+    //printf("nb instructions : %d\n", nbinstructions);
     while (pc < nbinstructions && pc >= 0) {
         instruction = fetch(filename_instructions, pc);
         int BBC = getBCC(instruction), opcode = getOpcode(instruction);
         if (opcode != 0x5 && BBC != 0x8) {
             result = decode(instruction);
-            printf("result : %llx\n", result);
+            //printf("result : %llx\n", result);
         }
 
         newpc = calcul_pc(pc, instruction);
-        printf("new pc : %d\n", newpc);
+        //printf("new pc : %d\n", newpc);
         pc = newpc;
     }
 
