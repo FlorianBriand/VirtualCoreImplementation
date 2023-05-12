@@ -4,7 +4,10 @@
 
 #include "fetch.h"
 
+
 extern unsigned long long R[16];// 16 registres
+
+extern char* FILENAME_INSTRUCTIONS;
 
 int getPCcomparaison(unsigned int instruction, int pc);
 
@@ -97,7 +100,7 @@ unsigned int fetch(char *instruction_file, int pc) {
     file = fopen(instruction_file, "rb");
 
     if (file == NULL) {
-        printf("Erreur dans l'ouverture du fichier instructions\n");
+        printf("3 - Erreur dans l'ouverture du fichier %s\n", instruction_file);
         exit(1);
     }
 

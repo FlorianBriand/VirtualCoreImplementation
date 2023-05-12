@@ -5,11 +5,14 @@
 
 #include "main.h"
 
+char* FILENAME_INSTRUCTIONS = "file";
 
 
 unsigned long long R[16];// 16 registres
 
 int get_nb_instructions(const char *string);
+
+void verifier_existence_fichier(char *registers);
 
 //
 int main(int argc, char *argv[]) {
@@ -20,8 +23,13 @@ int main(int argc, char *argv[]) {
     }
 
     // Récupérer les noms de fichiers des registres et des instructions
-    char* filename_registers = argv[2];
-    char* filename_instructions = argv[1];
+    char *filename_registers = argv[2];
+    char *filename_instructions = argv[1];
+
+    verifier_existence_fichier(filename_registers);
+    verifier_existence_fichier(filename_instructions);
+
+    FILENAME_INSTRUCTIONS = filename_instructions;
 
     //Fetch
     //récupération des instructions
@@ -56,6 +64,20 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+void verifier_existence_fichier(char *registers) {
+    FILE *file = NULL;
+
+    file = fopen(registers, "rb");
+
+    if (file == NULL) {
+        printf("1 - Erreur dans l'ouverture du fichier %s\n", registers);
+        exit(1);
+    }
+
+    fclose(file);
+
+}
+
 int get_nb_instructions(const char *string) {
     FILE *file = NULL;
     int c, i = 0;
@@ -63,7 +85,7 @@ int get_nb_instructions(const char *string) {
     file = fopen(string, "rb");
 
     if (file == NULL) {
-        printf("Erreur dans l'ouverture du fichier instructions\n");
+        printf("2 - Erreur dans l'ouverture du fichier %s\n", string);
         exit(1);
     }
 

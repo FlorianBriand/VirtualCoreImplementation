@@ -18,7 +18,6 @@ void sauvegarder_registres(char *nom_fichier);
 #define FILENAME_REGISTERS "core/registers.txt"
 
 #define FILENAME_REGISTERS_FINAL "core/final.txt"
-#define FILENAME_INSTRUCTIONS "out/bin.out"
 
 
 
