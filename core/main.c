@@ -11,17 +11,28 @@ unsigned long long R[16];// 16 registres
 
 int get_nb_instructions(const char *string);
 
-int main() {
+//
+int main(int argc, char *argv[]) {
+    // Vérifier que deux arguments ont été fournis
+    if (argc != 3) {
+        printf("Erreur : le programme doit être appelé avec deux arguments : le nom du fichier des registres et le nom du fichier des instructions.\n");
+        return 1;
+    }
+
+    // Récupérer les noms de fichiers des registres et des instructions
+    char* filename_registers = argv[2];
+    char* filename_instructions = argv[1];
+
     //Fetch
     //récupération des instructions
     unsigned long long result;
     int pc = 0, newpc, nbinstructions;
     unsigned int instruction;
-    lire_fichier_registres(FILENAME_REGISTERS);
-    nbinstructions = get_nb_instructions(FILENAME_INSTRUCTIONS);
+    lire_fichier_registres(filename_registers);
+    nbinstructions = get_nb_instructions(filename_instructions);
     printf("nb instructions : %d\n", nbinstructions);
     while (pc < nbinstructions && pc >= 0) {
-        instruction = fetch(FILENAME_INSTRUCTIONS, pc);
+        instruction = fetch(filename_instructions, pc);
         int BBC = getBCC(instruction), opcode = getOpcode(instruction);
         if (opcode != 0x5 && BBC != 0x8) {
             result = decode(instruction);
