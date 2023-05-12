@@ -88,7 +88,7 @@ int comparaison(bool resultat_comparaison, int pc, long instruction_suivante) {
 
 unsigned int fetch(char *instruction_file, int pc) {
     FILE *file = NULL;
-    int c, i;
+    int i;
 
     unsigned char *instruction;
     instruction = malloc(4);
