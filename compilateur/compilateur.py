@@ -9,7 +9,7 @@ DIR_BINARY = "out/"
 # Assembleurs des programmes 1 à 4
 FILE_S_init = "compilateur/init.s"
 FILE_S_add128 = "compilateur/add128.s"
-FILE_S_lshift_64_128 = "compilateur/lshift_64_128.s"
+FILE_S_lshift_64_128 = "compilateur/lshift64_128.s"
 FILE_S_mul64 = "compilateur/mul64.s"
 
 
