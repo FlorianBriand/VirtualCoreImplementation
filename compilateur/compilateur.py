@@ -1,17 +1,17 @@
-import os
-
 from compilateur.Branchement import convertiBranchementEnBinaire
 from compilateur.DataProcessingInstruction import convertiDataProcessingInstructionEnBinaire
 
 TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1 = "out/tmp_file_assembly_to_string_of_0_and_1.txt"
 
-FILE_BINARY = "out/bin.out"
+# Dossier des binaires
+DIR_BINARY = "out/"
 
-FILE_ASSEMBLEUR_S = "compilateur/assembleur.s"
+# Assembleurs des programmes 1 à 4
+FILE_S_init = "compilateur/init.s"
+FILE_S_add128 = "compilateur/add128.s"
+FILE_S_lshift_64_128 = "compilateur/lshift_64_128.s"
+FILE_S_mul64 = "compilateur/mul64.s"
 
-
-# FILE_ASSEMBLEUR_S = "compilateur/first_program.s"
-# FILE_ASSEMBLEUR_S = "compilateur/third_program.s"
 
 def read_line_by_line(lignes):
     conversion = ""
@@ -44,7 +44,7 @@ def convert_ligne_to_string_of_0_and_1(ligne):
     return resultat
 
 
-def convert_file_of_0_and_1_to_binary_file():
+def convert_file_of_0_and_1_to_binary_file(nomFichier):
     contenu = lireFichier(TMP_FILE_ASSEMBLY_TO_STRING_OF_0_AND_1)
     contenu = contenu[0]
 
@@ -62,13 +62,26 @@ def convert_file_of_0_and_1_to_binary_file():
     print(arrayBin)
 
     # Creation of binary file
-    fichier = open(FILE_BINARY, "wb")
+
+    # Enlever le .s du nom du fichier
+    nomFichier = nomFichier[:-2]
+    # Enlever le compilateur/ du nom du fichier
+    nomFichier = nomFichier[12:]
+    nomFichier = DIR_BINARY + nomFichier + "_test"
+    fichier = open(nomFichier, "wb")
     fichier.write(arrayBin)
     fichier.close()
 
 
+# Compile les 4 premiers programmes
 def main():
-    nomFichier = FILE_ASSEMBLEUR_S
+    compilateur_fichier(FILE_S_init)
+    compilateur_fichier(FILE_S_add128)
+    compilateur_fichier(FILE_S_lshift_64_128)
+    compilateur_fichier(FILE_S_mul64)
+
+
+def compilateur_fichier(nomFichier):
     if verifiSiFichierExiste(nomFichier):
         lignes = lireFichier(nomFichier)
 
@@ -79,9 +92,8 @@ def main():
 
     read_line_by_line(lignes)
 
-    convert_file_of_0_and_1_to_binary_file()
+    convert_file_of_0_and_1_to_binary_file(nomFichier)
 
-    # hexedit pour débuger
 
 
 def verifiSiFichierExiste(nomFichier):
